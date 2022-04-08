@@ -1,0 +1,22 @@
+<h2>create playlist  </h2>
+<?php echo $this->tag->form("search/createplaylist"); ?>
+    <p>
+        <label for="playlist">playlist Name</label>
+        <?php echo $this->tag->textField("playlist"); ?>
+    </p>
+
+    <?php echo $this->tag->submitButton(
+    [
+    'create', 'name' => 'create', 'class' => 'btn btn-primary'] 
+); ?>
+<?php echo $this->tag->linkTo(['search', 'back','class' => 'btn btn-primary m-2']) ;?>
+</form>
+<?php 
+if($playlist->items) {
+    $size = sizeof($playlist->items) ;
+    $list = ''; 
+    for($i =0 ; $i< $size ; $i++ ) {
+        $list .= '<input type = "button"  class = "btn btn-secondary m-2" value = "'.$playlist->items[$i]->name.'">' ;
+    }
+    echo $list ;
+}

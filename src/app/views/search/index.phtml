@@ -1,0 +1,46 @@
+
+<h2>search songs </h2>
+<?php echo $this->tag->form("search"); ?>
+    <p>
+        <label for="name">song Name</label>
+        <?php echo $this->tag->textField("name"); ?>
+    </p>
+    <p>
+    
+        <input type="checkbox" id="track" name="arr[]" value="track">
+        <label for="track">track </label> <br>
+        <input type="checkbox" id="artist" name="arr[]" value="artist">
+        <label for="artist">artist </label> 
+        <input type="checkbox" id="album" name="arr[]" value="artist">
+        <label for="album">album </label> 
+        
+     
+    </p>
+
+ <?php echo $this->tag->submitButton(
+    [
+    'search', 'name' => 'search', 'class' => 'btn btn-primary'] 
+); ?>
+</form>
+
+
+<?php echo $this->tag->linkTo(
+    [
+    'search/createplaylist', 'create playlist', 'class' => 'btn btn-success m-2'] 
+); ?>
+<?php 
+if($records){
+$size = count($records);
+    $html = '' ;
+   if($size >0) {
+    for($i=0 ; $i < $size ; $i++) {
+         $html .= '<div class = "row  container alert alert-success"><div class = "col-sm-6">
+         <p> <strong>name: </strong>'.$records[$i]->album->album_type.'</p>
+         <p><strong>type: </strong>'.$records[$i]->album->name.'</p>
+         <p><strong>artists: </strong>'.$records[$i]->album->artists[0]->name.' ,'.$records[$i]->album->artists[1]->name.'</p>
+         <a href = "" class = "btn btn-danger m-2">add to playlist</a>
+         <audio src = "'.$records[$i]->album->external_urls->spotify.'"></audio> <span>
+         </div><div class = "col-sm-6" ><img src = "'.$records[$i]->album->images[0]->url.'" width = "200px"  height = "150px"></div></div>' ;
+    }
+    echo $html ;
+}}
