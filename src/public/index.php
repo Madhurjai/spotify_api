@@ -11,6 +11,7 @@ use Phalcon\Url;
 use Phalcon\Session\Manager;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
+require("../public/vendor/autoload.php");
 
 $config = new Config([]);
 
