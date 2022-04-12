@@ -3,6 +3,7 @@
 use Phalcon\Mvc\Controller;
 use GuzzleHttp\Client;
 use Guzzle\Http\Exception;
+use GuzzleHttp\Exception\ClientException ;
 
 class SearchController extends Controller
 {
