@@ -9,6 +9,7 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\Url;
 use Phalcon\Session\Manager;
+use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
 require("../public/vendor/autoload.php");
@@ -26,8 +27,14 @@ $loader->registerDirs(
     [
         APP_PATH . "/controllers/",
         APP_PATH . "/models/",
+        APP_PATH . "/components/",
     ]
 );
+$loader->registerClasses(
+    [
+    'App\components\Helperclass' => APP_PATH . '/components/Helperclass.php'
+    ]
+    );
 
 $loader->register();
 
@@ -68,32 +75,38 @@ $container->set(
 );
 
 $application = new Application($container);
+$eventsManager = new EventsManager();
+$eventsManager->attach(
+    'tokens',
+    new App\components\Helperclass()
+);
+// $application->setEventsManager($eventsManager);
+$container->set('EventManager', $eventsManager);
 
-
-
-// $container->set(
-//     'db',
-//     function () {
-//         return new Mysql(
-//             [
-//                 'host'     => 'localhost',
-//                 'username' => 'root',
-//                 'password' => '',
-//                 'dbname'   => 'phalt',
-//                 ]
-//             );
-//         }
-// );
 
 $container->set(
-    'mongo',
+    'db',
     function () {
-        $mongo = new MongoClient();
-
-        return $mongo->selectDB('phalt');
-    },
-    true
+        return new Mysql(
+            [
+                'host'     => 'mysql-server',
+                'username' => 'root',
+                'password' => 'secret',
+                'dbname'   => 'spotify',
+                ]
+            );
+        }
 );
+
+// $container->set(
+//     'mongo',
+//     function () {
+//         $mongo = new MongoClient();
+
+//         return $mongo->selectDB('phalt');
+//     },
+//     true
+// );
 
 try {
     // Handle the request

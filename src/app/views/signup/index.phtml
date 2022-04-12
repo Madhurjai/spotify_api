@@ -11,9 +11,15 @@
         <label for="email">E-Mail</label>
         <?php echo $this->tag->textField("email"); ?>
     </p>
+    <p>
+        <label for="password">Password</label>
+        <?php echo $this->tag->textField("password"); ?>
+    </p>
 
     <p>
         <?php echo $this->tag->submitButton("Register"); ?>
     </p>
-
+<?php 
+?>
 </form>
+<?php echo $this->tag->linkTo(['login', 'login', 'class' => 'btn btn-primary']); ?>

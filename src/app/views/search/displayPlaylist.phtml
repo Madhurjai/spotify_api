@@ -1,0 +1,24 @@
+<?php 
+if($items) {
+    $size = count($items) ;
+  
+    $html = '';
+    for($i =0 ; $i < $size ; $i++) {
+        $html .= '<div class = "row  container alert alert-success"><div class = "col-sm-6">
+        <p> <strong>name: </strong>' . $items[$i]->track->album->name . '</p>
+        <p> <strong>type: </strong>' . $items[$i]->track->album->type . '</p>
+        <form  method = "POST" , action = "/search/displayPlaylist?uris='.$items[$i]->track->uri.'" >
+        <input type = "hidden" name = "id" value = "'.$playlist_id.'">
+        <input type = "submit" name = "remove" value = "remove from playlist">
+        </form></div>
+        <div class = "col-sm-6" >
+        <img src = "' . $items[$i]->track->album->images[0]->url. '" width = "200px"  height = "150px"></div></div>' ;
+    }
+    echo $html ;
+
+    
+} else { 
+    echo "<h2 class = 'alert alert-danger'>playlist is empty !!</h2>" ;
+}
+?>
+<?php echo $this->tag->linkTo(['search', 'back','class' => 'btn btn-primary m-2']) ;?>

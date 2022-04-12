@@ -1,0 +1,18 @@
+<h2>login using this form</h2>
+
+<?php echo $this->tag->form(""); ?>
+    <p>
+        <label for="email">E-Mail</label>
+        <?php echo $this->tag->textField("email"); ?>
+    </p>
+    <p>
+        <label for="password">Password</label>
+        <?php echo $this->tag->textField("password"); ?>
+    </p>
+
+    <p>
+        <?php echo $this->tag->submitButton("login"); ?>
+    </p>
+
+</form>
+<?php echo $this->tag->linkTo(['signup', 'signup', 'class' => 'btn btn-primary']); ?>

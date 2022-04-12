@@ -1,0 +1,17 @@
+<h1>my playlist</h1>
+<?php
+  if($myplaylist) {
+      $size = count($myplaylist);
+    //   echo "<pre>";
+    //   print_r($myplaylist);
+    //   die ;
+      $html = '';
+      for($i =0 ; $i < $size ; $i++) {
+          $html .= '<form method = "POST" , action = "/search/displayPlaylist" , style = "display : inline ;"><input type  = "hidden" name = "id", value = "'.$myplaylist[$i]->id.'">
+          <input type = "submit" name = "playlist" value = "'.$myplaylist[$i]->name.'" class = "btn btn-primary m-2" > </form>' ;
+      }
+      echo $html ;
+  }
+
+?>
+<?php echo $this->tag->linkTo(['search', 'back','class' => 'btn btn-warning m-2']) ;?>

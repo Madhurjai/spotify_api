@@ -1,4 +1,17 @@
-<h2>create playlist  </h2>
+
+<?php 
+if(isset($playlist->items)) {
+    $size = sizeof($playlist->items) ;
+ 
+    $html = ''; 
+    for($i =0 ; $i< $size ; $i++ ) {
+        $html .= '<form method = "POST" , action = "/search/myplaylist?urls='.$urls.'" , style = "display : inline ;"><input type  = "hidden" name = "id", value = "'.$playlist->items[$i]->id.'">
+          <input type = "submit" name = "playlist" value = "'.$playlist->items[$i]->name.'" class = "btn btn-warning m-2" > </form>' ;
+    }
+    echo $html ;
+     echo $this->tag->linkTo(['search', 'back','class' => 'btn btn-primary m-2']) ;
+} else { ?>
+    <h2>create playlist  </h2>
 <?php echo $this->tag->form("search/createplaylist"); ?>
     <p>
         <label for="playlist">playlist Name</label>
@@ -11,12 +24,4 @@
 ); ?>
 <?php echo $this->tag->linkTo(['search', 'back','class' => 'btn btn-primary m-2']) ;?>
 </form>
-<?php 
-if($playlist->items) {
-    $size = sizeof($playlist->items) ;
-    $list = ''; 
-    for($i =0 ; $i< $size ; $i++ ) {
-        $list .= '<input type = "button"  class = "btn btn-secondary m-2" value = "'.$playlist->items[$i]->name.'">' ;
-    }
-    echo $list ;
-}
+ <?php }

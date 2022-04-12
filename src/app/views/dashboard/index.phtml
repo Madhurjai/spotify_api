@@ -1,0 +1,10 @@
+<?php 
+if(isset($details)) {
+    echo  "<div class = 'container alert alert-secondary'>
+    <h2 class = 'm-5 '>Hello ".$details->display_name."</h2>
+    <p>user_id : <strong>".$details->id."</strong></p></div>" ;
+
+    echo $this->tag->linkTo(['/search','search library', 'class' => 'btn btn-success']);
+    echo "<a href='/?val=1' class = 'btn btn-primary m-5'>signout</a>" ;
+}
+?>
